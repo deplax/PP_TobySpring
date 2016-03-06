@@ -5,10 +5,9 @@ import java.sql.SQLException;
 /**
  * Created by Administrator on 2016-03-05.
  */
-public class DUserDao extends UserDao{
-    public Connection getConnection() throws ClassNotFoundException, SQLException{
+public class NConnectionMaker implements ConnectionMaker{
+    public Connection makeConnection() throws ClassNotFoundException, SQLException{
         Class.forName("com.mysql.jdbc.Driver");
         return DriverManager.getConnection("jdbc:mysql://localhost/spring", "root", "pass");
     }
 }
-

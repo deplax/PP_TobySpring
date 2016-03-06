@@ -5,14 +5,14 @@ import java.sql.*;
  */
 public class UserDao {
 
-    private SimpleConnectionMaker simpleConnectionMaker;
+    private ConnectionMaker connectionMaker;
 
     public UserDao(){
-        simpleConnectionMaker = new SimpleConnectionMaker();
+        connectionMaker = new DConnectionMaker();
     }
 
     public void add(User user) throws  ClassNotFoundException, SQLException{
-        Connection c = simpleConnectionMaker.makeNewConnection();
+        Connection c = connectionMaker.makeConnection();
 
         String sql = "insert into users(id, name ,password) values(?, ?, ?)";
         PreparedStatement ps = c.prepareStatement(sql);
@@ -26,7 +26,7 @@ public class UserDao {
     }
 
     public User get(String id) throws ClassNotFoundException, SQLException{
-        Connection c = simpleConnectionMaker.makeNewConnection();
+        Connection c = connectionMaker.makeConnection();
 
         String sql = "select * from users where id = ?";
         PreparedStatement ps = c.prepareStatement(sql);
